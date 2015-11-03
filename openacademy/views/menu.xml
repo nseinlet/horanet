@@ -8,7 +8,8 @@
 	<record model='ir.actions.act_window' id='openacademy.sessionlist'>
 		<field name="name">Sessions</field>
 		<field name="res_model">openacademy.session</field>
-		<field name="view_mode">tree,form</field>
+		<field name="view_mode">tree,form,calendar,gantt,graph,pivot</field>
+		<field name="context" eval="{'search_default_my_courses': 1}"/>
 	</record>
 	<record model='ir.actions.act_window' id='openacademy.partnerlist'>
 		<field name="name">Partners</field>

@@ -13,7 +13,8 @@
 								<field name="course_id" options="{'no_quick_create': True, 'no_create': True}" required="True"/>
 								<field name="seats"/>
 								<field name="taken_seats" widget="progressbar"/>
-								<field name='instructor_id' context="{'default_instructor': True}"/>	
+								<field name='instructor_id' context="{'default_instructor': True}"/>
+								<field name="country_id"/>	
 							</group>
 							<group col="1">
 								<separator string="Schedule"/>
@@ -21,6 +22,7 @@
 									<field name="active"/>	
 									<field name="start_date"/>
 									<field name="duration"/>
+									<field name="end_date"/>
 								</group>
 							</group>
 						</group>
@@ -38,12 +40,81 @@
 			<field name="name">Session Tree</field>
 			<field name="model">openacademy.session</field>
 			<field name="arch" type="xml">
-				<tree>
+				<tree decoration-info="duration&lt;5" decoration-danger="duration&gt;15">
 					<field name="name"/>
 					<field name="course_id"/>
+					<field name="duration" invisible="1"/>
 					<field name="taken_seats" widget="progressbar"/>
 				</tree>
 			</field>
 		</record>
+		
+		<!-- Calendar -->
+		<record model='ir.ui.view' id="session_calendar">
+			<field name="name">Session Calendar</field>
+			<field name="model">openacademy.session</field>
+			<field name="arch" type="xml">
+				<calendar string="Sessions" date_start="start_date" date_stop="end_date" color="course_id">
+    				<field name="name"/>
+				</calendar>
+			</field>
+		</record>
+		
+		<!-- Search -->
+		<record model='ir.ui.view' id="session_search">
+			<field name="name">Session Search</field>
+			<field name="model">openacademy.session</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name='name'/>
+					<field name='course_id'/>
+					<filter name="my_courses" string="My Courses"
+            			domain="[('course_id.responsible_id', '=', uid)]"/>
+            		<group string="Group By">
+				        <filter name="group_by_instructor" string="Instructor"
+				                context="{'group_by': 'instructor_id'}"/>
+				        <filter name="group_by_course" string="Course"
+				                context="{'group_by': 'course_id'}"/>
+				    </group>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Gantt -->
+		<record model="ir.ui.view" id="session_gantt_view">
+            <field name="name">session.gantt</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <gantt string="Session Gantt" color="course_id" date_start="start_date" date_delay="hours" default_group_by='instructor_id'>
+                    <field name="name"/>
+                </gantt>
+            </field>
+        </record>
+		
+		<!-- Graph -->
+		<record model="ir.ui.view" id="session_graph_view">
+            <field name="name">session.graph</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <graph type="pie">
+                	<field name="course_id"/>
+                	<field name="seats" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        
+        <!-- Pivot -->
+		<record model="ir.ui.view" id="session_pivot_view">
+            <field name="name">session.pivot</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <pivot>
+                	<field name="course_id" type="row"/>
+                	<field name="instructor_id" type="col"/>
+                	<field name="seats" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        
 	</data>
 </openerp>

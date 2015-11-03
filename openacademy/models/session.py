@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from datetime import timedelta
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -10,11 +11,15 @@ class Session(models.Model):
     start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6,2), string="Duration", 
         help="Duration in days")
+    end_date = fields.Date(store=True, compute='_compute_end_date', inverse='_computeinverse_end_date')
     seats = fields.Integer(string="# of seats")
     instructor_id = fields.Many2one('res.partner', domain="['|', ('instructor', '=', True), ('category_id.name', 'ilike', 'teacher')]")
     attendee_ids = fields.Many2many('res.partner')
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
     active = fields.Boolean(default=True)
+    country_id = fields.Many2one('res.country', string="Country", related="course_id.responsible_id.partner_id.country_id")
+    hours = fields.Float(string="Duration in hours",
+                         compute='_get_hours', inverse='_set_hours')
     
     @api.depends('seats', 'attendee_ids')    
     def _taken_seats(self):
@@ -41,3 +46,30 @@ class Session(models.Model):
                         'message': 'Too many attendees for the number of seats',
                     }
                 }
+
+    @api.constrains('attendee_ids', 'instructor_id')
+    def _check_instructor(self):
+        for rec in self:
+            if rec.instructor_id and rec.instructor_id.id in rec.attendee_ids.ids:
+                raise ValidationError("Instructor cannot be an attendee of his own session.")
+            
+    @api.depends('start_date', 'duration')
+    def _compute_end_date(self):
+        for rec in self:
+            if rec.start_date and rec.duration:
+                rec.end_date = fields.Date.to_string(fields.Date.from_string(rec.start_date+" 00:00:00") + timedelta(days=rec.duration, seconds=-1))
+            
+    def _computeinverse_end_date(self):
+        for rec in self:
+            if rec.start_date and rec.end_date:
+                rec.duration = (fields.Date.from_string(rec.end_date+" 23:59:00") - fields.Date.from_string(rec.start_date+" 00:00:00")).days + 1
+                
+    @api.depends('duration')
+    def _get_hours(self):
+        for r in self:
+            r.hours = r.duration * 24
+
+    def _set_hours(self):
+        for r in self:
+            r.duration = r.hours / 24
+            
