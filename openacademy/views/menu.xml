@@ -1,0 +1,21 @@
+<openerp>
+<data>
+	<record model='ir.actions.act_window' id='openacademy.courselist'>
+		<field name="name">Courses</field>
+		<field name="res_model">openacademy.course</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record model='ir.actions.act_window' id='openacademy.sessionlist'>
+		<field name="name">Sessions</field>
+		<field name="res_model">openacademy.session</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	<menuitem id="topmenu" name="OpenAcademy" sequence="10"/>
+	<menuitem id="topcourses" parent="topmenu" name="Courses" sequence="10"/>
+	<menuitem id="menu_course_list" parent="topcourses" name="Courses" sequence="10"
+	action="courselist"/>
+	<menuitem id="menu_session_list" parent="topcourses" name="Sessions" sequence="10"
+	action="sessionlist"/>
+</data>
+</openerp>

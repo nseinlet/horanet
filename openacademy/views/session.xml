@@ -1,0 +1,34 @@
+<openerp>
+	<data>
+		<record model='ir.ui.view' id="session_form">
+			<field name="name">Session Form</field>
+			<field name="model">openacademy.session</field>
+			<field name="arch" type="xml">
+				<form string="Session form">
+					<sheet>
+						<group col="2">
+							<group col="2">
+								<field name="name"/>
+								<field name="course_id" options="{'no_quick_create': True, 'no_create': True}" required="True"/>
+								<field name="seats"/>
+								<field name='instructor_id'/>	
+							</group>
+							<group col="1">
+								<separator string="Schedule"/>
+								<group col="2">	
+									<field name="start_date"/>
+									<field name="duration"/>
+								</group>
+							</group>
+						</group>
+						<notebook>
+							<page string="Attendees">
+								<field name="attendee_ids"/>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

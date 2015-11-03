@@ -1,0 +1,46 @@
+<openerp>
+	<data>
+		<record model='ir.ui.view' id="course_form">
+			<field name="name">Course Form</field>
+			<field name="model">openacademy.course</field>
+			<field name="arch" type="xml">
+				<form string="Course form">
+					<sheet>
+						<group>
+							<h1><field name="name"/></h1>
+							<field name="responsible_id"/>
+						</group>
+						<notebook>
+							<page string="Description">
+								<group col="1">
+									<field name="description" nolabel="1"/>
+								</group>
+							</page>
+							<page string="Sessions">
+								<group col="1">
+									<field name="session_ids">
+										<tree>
+											<field name="name"/>
+											<field name="start_date"/>
+										</tree>
+									</field>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model='ir.ui.view' id="course_search">
+			<field name="name">Course search</field>
+			<field name="model">openacademy.course</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name"/>
+					<field name="description"/>
+				</search>
+			</field>
+		</record>
+	</data>
+</openerp>

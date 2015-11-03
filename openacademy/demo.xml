@@ -1,0 +1,19 @@
+<openerp>
+    <data>
+        <record model='openacademy.course' id='course0'>
+        	<field name="name">Course 0</field>
+        	<field name="description">Course N° 0</field>
+        </record>
+        <record model='openacademy.course' id='course1'>
+        	<field name="name">Course 1</field>
+        	<field name="description">Long description of the 
+        	
+        	Awesome
+        	
+        	Course N° 1</field>
+        </record>
+        <record model='openacademy.course' id='course2'>
+        	<field name="name">Course 2</field>
+        </record>
+    </data>
+</openerp>
