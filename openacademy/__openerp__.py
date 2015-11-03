@@ -30,6 +30,7 @@
         'views/partner.xml',
         'views/menu.xml',
         'templates.xml',
+        'data/categories.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

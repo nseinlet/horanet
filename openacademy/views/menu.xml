@@ -10,6 +10,16 @@
 		<field name="res_model">openacademy.session</field>
 		<field name="view_mode">tree,form</field>
 	</record>
+	<record model='ir.actions.act_window' id='openacademy.partnerlist'>
+		<field name="name">Partners</field>
+		<field name="res_model">res.partner</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record model='ir.actions.act_window' id='openacademy.partnercategorylist'>
+		<field name="name">Partner categories</field>
+		<field name="res_model">res.partner.category</field>
+		<field name="view_mode">tree,form</field>
+	</record>
 	
 	<menuitem id="topmenu" name="OpenAcademy" sequence="10"/>
 	<menuitem id="topcourses" parent="topmenu" name="Courses" sequence="10"/>
@@ -17,5 +27,9 @@
 	action="courselist"/>
 	<menuitem id="menu_session_list" parent="topcourses" name="Sessions" sequence="10"
 	action="sessionlist"/>
+	<menuitem id="menu_topparams" parent="topmenu" name="Parameters" sequence="100"/>
+	<menuitem id="menu_partners" parent="menu_topparams" name="Partners" sequence="10"/>
+	<menuitem id="menu_partnerslist" parent="menu_partners" name="Partners" sequence="10" action="partnerlist"/>
+	<menuitem id="menu_partnercategorieslist" parent="menu_partners" name="Categories" sequence="10" action="partnercategorylist"/>
 </data>
 </openerp>
