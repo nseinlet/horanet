@@ -11,7 +11,7 @@
 								<field name="name"/>
 								<field name="course_id" options="{'no_quick_create': True, 'no_create': True}" required="True"/>
 								<field name="seats"/>
-								<field name='instructor_id'/>	
+								<field name='instructor_id' context="{'default_instructor': True}"/>	
 							</group>
 							<group col="1">
 								<separator string="Schedule"/>

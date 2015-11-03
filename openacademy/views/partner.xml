@@ -1,0 +1,21 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="res_partner_instructor">
+			<field name="name">Res partner instructor</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='website']" position="after">
+					<field name="instructor"/>
+				</xpath>
+				<xpath expr="//page[@name='internal_notes']" position="after">
+					<page name="sessions" string="sessions" attrs="{'invisible': [('instructor', '=', False)]}">
+						<group col="1">
+							<field name="session_ids"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

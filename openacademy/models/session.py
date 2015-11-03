@@ -11,5 +11,5 @@ class Session(models.Model):
     duration = fields.Float(digits=(6,2), string="Duration", 
         help="Duration in days")
     seats = fields.Integer(string="# of seats")
-    instructor_id = fields.Many2one('res.partner')
+    instructor_id = fields.Many2one('res.partner', domain="[('instructor', '=', True)]")
     attendee_ids = fields.Many2many('res.partner')
