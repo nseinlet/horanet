@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from openerp import http
 
-# class Openacademy(http.Controller):
-#     @http.route('/openacademy/openacademy/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class Openacademy(http.Controller):
+    @http.route('/openacademy/openacademy/', auth='public', website=True)
+    def index(self, **kw):
+        return http.request.render('openacademy.helloworld', {
+            'mysessions': http.request.env['openacademy.session'].sudo().search([]),
+        })
 
 #     @http.route('/openacademy/openacademy/objects/', auth='public')
 #     def list(self, **kw):

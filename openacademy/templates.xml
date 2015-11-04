@@ -1,5 +1,25 @@
 <openerp>
     <data>
+    	<template id="helloworld">
+    		<t t-call="website.layout">
+                <t t-set="title">Academy</t>
+                <div class="oe_structure">
+                    <div class="container">
+                    	<div class="row">
+                    	<table class="table">
+                    	<tbody>
+			    		<t t-foreach="mysessions" t-as="mysession">
+			    			<tr>
+			    			<td><li t-esc="mysession.name"/></td>
+			    			</tr>
+			    		</t>
+			    		</tbody>
+			    		</table>
+			    		</div>
+			    	</div>
+			    </div>
+    		</t>
+    	</template>
         <!-- <template id="listing"> -->
         <!--   <ul> -->
         <!--     <li t-foreach="objects" t-as="object"> -->
