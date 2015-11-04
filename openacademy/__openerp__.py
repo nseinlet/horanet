@@ -29,6 +29,7 @@
         'views/session.xml',
         'views/partner.xml',
         'views/menu.xml',
+        'views/session_workflow.xml',
         'templates.xml',
         'data/categories.xml',
     ],

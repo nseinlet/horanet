@@ -3,10 +3,17 @@ from datetime import timedelta
 from openerp import models, fields, api
 from openerp.exceptions import ValidationError
 
+PRIORITY_LIST = (('0', 'Low'), ('1', 'Normal'), ('2', 'High'), ('3', 'Nuclear'))
+STATES_LIST = (('draft', 'Draft'),
+               ('confirmed', 'Confirmed'),
+               ('done', 'Done'))
+
 class Session(models.Model):
     _name = 'openacademy.session'
-
+    _order = "priority, name"
+    
     name = fields.Char(required=True)
+    state = fields.Selection(STATES_LIST)
     course_id = fields.Many2one('openacademy.course', ondelete="restrict")
     start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6,2), string="Duration", 
@@ -20,6 +27,8 @@ class Session(models.Model):
     country_id = fields.Many2one('res.country', string="Country", related="course_id.responsible_id.partner_id.country_id")
     hours = fields.Float(string="Duration in hours",
                          compute='_get_hours', inverse='_set_hours')
+    color = fields.Integer()
+    priority = fields.Selection(PRIORITY_LIST , default='1') 
     
     @api.depends('seats', 'attendee_ids')    
     def _taken_seats(self):
@@ -72,4 +81,16 @@ class Session(models.Model):
     def _set_hours(self):
         for r in self:
             r.duration = r.hours / 24
+        
+    @api.multi
+    def action_draft(self):
+        self.state = "draft"
             
+    @api.multi
+    def action_confirm(self):
+        self.state = "confirmed"
+
+    @api.multi
+    def action_done(self):
+        self.write({'state': 'done'})
+        

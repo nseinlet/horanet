@@ -8,8 +8,14 @@
 	<record model='ir.actions.act_window' id='openacademy.sessionlist'>
 		<field name="name">Sessions</field>
 		<field name="res_model">openacademy.session</field>
-		<field name="view_mode">tree,form,calendar,gantt,graph,pivot</field>
+		<field name="view_mode">tree,form,calendar,gantt,graph,pivot,kanban</field>
 		<field name="context" eval="{'search_default_my_courses': 1}"/>
+	</record>
+	<record model='ir.actions.act_window' id='openacademy.sessionlistbyinstructor'>
+		<field name="name">Sessions by instructor</field>
+		<field name="res_model">openacademy.session</field>
+		<field name="view_mode">kanban,form</field>
+		<field name="view_id" ref="openacademy.view_openacad_session_kanban2"/>
 	</record>
 	<record model='ir.actions.act_window' id='openacademy.partnerlist'>
 		<field name="name">Partners</field>
@@ -26,8 +32,10 @@
 	<menuitem id="topcourses" parent="topmenu" name="Courses" sequence="10"/>
 	<menuitem id="menu_course_list" parent="topcourses" name="Courses" sequence="10"
 	action="courselist"/>
-	<menuitem id="menu_session_list" parent="topcourses" name="Sessions" sequence="10"
+	<menuitem id="menu_session_list" parent="topcourses" name="Sessions" sequence="12"
 	action="sessionlist"/>
+	<menuitem id="menu_session_listbyinstructor" parent="topcourses" name="Sessions by instructor" sequence="15"
+	action="openacademy.sessionlistbyinstructor"/>
 	<menuitem id="menu_topparams" parent="topmenu" name="Parameters" sequence="100"/>
 	<menuitem id="menu_partners" parent="menu_topparams" name="Partners" sequence="10"/>
 	<menuitem id="menu_partnerslist" parent="menu_partners" name="Partners" sequence="10" action="partnerlist"/>
