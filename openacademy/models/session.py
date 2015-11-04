@@ -10,17 +10,18 @@ STATES_LIST = (('draft', 'Draft'),
 
 class Session(models.Model):
     _name = 'openacademy.session'
+    _inherit = 'mail.thread'
     _order = "priority, name"
     
     name = fields.Char(required=True)
-    state = fields.Selection(STATES_LIST)
-    course_id = fields.Many2one('openacademy.course', ondelete="restrict")
+    state = fields.Selection(STATES_LIST, track_visibility="onchange")
+    course_id = fields.Many2one('openacademy.course', ondelete="restrict", track_visibility="onchange")
     start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6,2), string="Duration", 
         help="Duration in days")
     end_date = fields.Date(store=True, compute='_compute_end_date', inverse='_computeinverse_end_date')
-    seats = fields.Integer(string="# of seats")
-    instructor_id = fields.Many2one('res.partner', domain="['|', ('instructor', '=', True), ('category_id.name', 'ilike', 'teacher')]")
+    seats = fields.Integer(string="# of seats", track_visibility="onchange")
+    instructor_id = fields.Many2one('res.partner', domain="['|', ('instructor', '=', True), ('category_id.name', 'ilike', 'teacher')]", track_visibility="onchange")
     attendee_ids = fields.Many2many('res.partner')
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
     active = fields.Boolean(default=True)
