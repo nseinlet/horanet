@@ -34,7 +34,8 @@
         'templates.xml',
         'website.xml',
         'data/categories.xml',
-        
+        'wizards/register.xml',
+        #'formulaire.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
