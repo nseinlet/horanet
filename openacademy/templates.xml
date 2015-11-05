@@ -5,12 +5,13 @@
                 <t t-set="title">Academy</t>
                 <div class="oe_structure">
                     <div class="container">
+                    <h1><span t-esc="nomrecu"/></h1>
                     	<div class="row">
                     	<table class="table">
                     	<tbody>
 			    		<t t-foreach="mysessions" t-as="mysession">
 			    			<tr>
-			    			<td t-esc="mysession.name"/>
+			    			<td><a t-attf-href="/openacademy/openacademy/{{slug(mysession)}}/"><span t-esc="mysession.name"/></a></td>
 			    			<td t-esc="mysession.course_id.name"/>
 			    			<td t-esc="mysession.instructor_id.name"/>
 			    			</tr>
@@ -57,14 +58,25 @@
         <!--     </li> -->
         <!--   </ul> -->
         <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
+        
+        <template id="object">
+            <t t-call="website.layout">
+                <t t-set="title">Academy</t>
+                <div class="oe_structure">
+                    <div class="container">
+			          <table>
+			          	<tr>
+			          		<td>Nom</td>
+			          		<td><span t-field="object.name"/></td>
+			          	</tr>
+			          	<tr>
+			          		<td>Places</td>
+			          		<td><span t-field="object.seats"/></td>
+			          	</tr>
+			          </table>
+			          </div>
+			    </div>
+			</t>
+        </template>
     </data>
 </openerp>

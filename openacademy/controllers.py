@@ -15,8 +15,8 @@ class Openacademy(http.Controller):
 #             'objects': http.request.env['openacademy.openacademy'].search([]),
 #         })
 
-#     @http.route('/openacademy/openacademy/objects/<model("openacademy.openacademy"):obj>/', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('openacademy.object', {
-#             'object': obj
-#         })
+    @http.route('/openacademy/openacademy/<model("openacademy.session"):obj>/', auth='public', website=True)
+    def object(self, obj, **kw):
+        return http.request.render('openacademy.object', {
+            'object': obj
+        })

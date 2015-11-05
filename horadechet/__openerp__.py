@@ -24,7 +24,6 @@
 
     # always loaded
     'data': [
-        'templates.xml',
         'website.xml',
     ],
     

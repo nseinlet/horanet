@@ -1,0 +1,11 @@
+<openerp>
+	<data>
+		<template id="mainpage" inherit_id="website.homepage">
+			<xpath expr="//div[@id='wrap']" position="inside">
+				<div class="row" name="activities">
+					
+				</div>
+			</xpath>
+		</template>
+	</data>
+</openerp>

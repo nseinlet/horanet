@@ -1,0 +1,15 @@
+<openerp>
+	<data>
+		<template id='mainpage_activities' inherit_id="openacademy.mainpage">
+			<xpath expr="//div[@name='activities']" position='inside'>
+				<div class="col-md-2">
+					<p class="bg-primary">Piscines</p>
+					<ul>
+						<li><a href="/piscines/">Piscines</a></li>
+						<li><a href="/vestiaires/">Vestiaires</a></li>
+					</ul>
+				</div>
+			</xpath>
+		</template>
+	</data>
+</openerp>

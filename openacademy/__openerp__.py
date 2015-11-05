@@ -32,6 +32,7 @@
         'views/menu.xml',
         'views/session_workflow.xml',
         'templates.xml',
+        'website.xml',
         'data/categories.xml',
         
     ],
