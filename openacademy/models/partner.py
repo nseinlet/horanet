@@ -24,9 +24,17 @@ class Partner(models.Model):
             if r.status_code == requests.codes.ok:
                 res = r.json()
                 if res[u'features']:
-                    elem = res[u'features'][0]
-                    self.city = elem['properties']['city']
-                    self.street = elem['properties']['name']
+                    if len(res[u'features'])>1:
+                        wiz_id = self.env['openacademy.address.selector'].create({'partner_id': self.id})
+                        for feat in res[u'features']:
+                            self.env['openacademy.address.choice'].create({
+                                'street': feat['properties']['name'],
+                                'city': feat['properties']['city'],
+                            })
+                    else:
+                        elem = res[u'features'][0]
+                        self.city = elem['properties']['city']
+                        self.street = elem['properties']['name']
     
 class StatutEntite(models.Model):
     _name = 'openacademy.statutentite'

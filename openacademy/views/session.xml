@@ -7,6 +7,7 @@
 			<field name="arch" type="xml">
 				<form string="Session form">
 					<header>
+						<button type="object" name="register_atendees_wizard" string="Add attendees" class="oe_highlight"/>
 						<button type="workflow" name="draft" string="Draft" states="confirmed,done"/>
 						<button type="workflow" name="confirm" string="Confirmed" states="draft"/>
 						<button type="workflow" name="done" string="Done" states="confirmed"/>

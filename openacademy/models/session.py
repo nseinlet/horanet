@@ -95,3 +95,17 @@ class Session(models.Model):
     def action_done(self):
         self.write({'state': 'done'})
         
+    @api.multi
+    def register_atendees_wizard(self):
+        wiz_id = self.env['openacademy.register'].create({
+            'session_ids': [(6, 0, [self.id,])], 
+            'state': '2'
+        })
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Select attendees',
+            'res_model': 'openacademy.register',
+            'res_id': wiz_id.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
