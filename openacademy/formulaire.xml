@@ -1,12 +1,17 @@
 <openerp>
 	<data>
-		<template id="piscine_form" page="True" name="piscine" >
+		<record id="openacademy.model_openacademy_course" model="ir.model">         
+            <!-- <field name="website_form_default_field_id" ref="crm.field_crm_lead_description" />  -->
+            <field name="website_form_access">True</field>
+            <field name="website_form_label">Create a course</field>
+        </record>
+                
+		<template id="website.piscine_form" page="True" name="piscine">
             <t t-call="website.layout">
                 <t t-set="title">Academy</t>
                 <div class="oe_structure">
                     <div class="container">
-                    
-		                <div>
+                     <div>
 		                    <form action="/website_form/" method="post" data-model_name="openacademy.course" data-success_page="/page/pool_thanks" class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data">
 		                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 		                        <div class="form-group form-field o_website_form_required_custom">
@@ -36,7 +41,7 @@
 		               
 		</template>
 
-        <template id="pool_thanks" name="Pool contact">
+        <template id="website.pool_thanks" name="Pool contact" page="True">
             <t t-call="website.layout">
               <div id="wrap">
                 <div class="oe_structure"/>

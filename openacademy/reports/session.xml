@@ -43,6 +43,13 @@
 	    </div>
     </template>
     
+    <template id="attendeedetail_inherit" inherit_id="attendeedetail">
+    	<xpath expr="//div[@t-field='attendee.email']" position="replace">
+    		<div class="col-md-4" t-field="attendee.email"/>
+    		<div class="col-md-2" t-field="attendee.phone"/>
+    	</xpath>
+    </template>
+    
     
 </data>
 </openerp>

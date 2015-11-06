@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['mail', 'website'],
+    'depends': ['mail', 'website', 'board', 'website_form'],
 
     # always loaded
     'data': [
@@ -29,13 +29,14 @@
         'views/course.xml',
         'views/session.xml',
         'views/partner.xml',
+        'reports/dashboard.xml',
         'views/menu.xml',
         'views/session_workflow.xml',
         'templates.xml',
         'website.xml',
         'data/categories.xml',
         'wizards/register.xml',
-        #'formulaire.xml',
+        'formulaire.xml',
         'reports/session.xml',
     ],
     # only loaded in demonstration mode
