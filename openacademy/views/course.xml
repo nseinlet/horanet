@@ -6,6 +6,15 @@
 			<field name="arch" type="xml">
 				<form string="Course form">
 					<sheet>
+						<div class="oe_button_box" name="button_box">
+	                        <button class="oe_stat_button" type="object" name="sessions_list" icon="fa-list">
+		                     	<field name="nbr_sessions" string="Sessions" widget="statinfo"/>
+		                    </button>
+		                    <button class="oe_stat_button" type="object" name="sessions_list">
+		                     	<field name="prc_sessions" string="Sessions" widget="percentpie"/>
+		                    </button>
+	                    </div>
+                    
 						<group>
 							<h1><field name="name"/></h1>
 							<field name="responsible_id"/>

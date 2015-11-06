@@ -36,6 +36,7 @@
         'data/categories.xml',
         'wizards/register.xml',
         #'formulaire.xml',
+        'reports/session.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

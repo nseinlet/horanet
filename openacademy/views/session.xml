@@ -57,6 +57,7 @@
 					<field name="course_id"/>
 					<field name="duration" invisible="1"/>
 					<field name="taken_seats" widget="progressbar"/>
+					<field name="attendee_ids" widget='many2many_tags'/>
 				</tree>
 			</field>
 		</record>
